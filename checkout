@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contratar Plano - TitanX</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body{
+    font-family:Arial, sans-serif;
+    overflow-x:hidden;
+    background:#0a2540;
+    color:white;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:22px 60px;
+
+    background:#08213b;
+
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+    color:#00ffd5;
+}
+
+nav{
+    display:flex;
+    gap:35px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#00ffd5;
+}
+
+/* =========================
+   FUNDO
+========================= */
+
+.checkout{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:50px 20px;
+
+    background:
+    linear-gradient(rgba(10,37,64,0.88),
+    rgba(10,37,64,0.92)),
+    url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1920&q=80');
+
+    background-size:cover;
+    background-position:center;
+}
+
+/* =========================
+   CAIXA PRINCIPAL
+========================= */
+
+.checkout-box{
+    width:100%;
+    max-width:1150px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+
+    padding:40px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    box-shadow:0 15px 50px rgba(0,0,0,0.35);
+}
+
+/* =========================
+   ESQUERDA
+========================= */
+
+.checkout-info{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.tag{
+    width:max-content;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    background:linear-gradient(90deg,#00ffd5,#00c7aa);
+
+    color:#062033;
+
+    font-size:12px;
+    font-weight:700;
+
+    margin-bottom:20px;
+}
+
+.checkout-info h1{
+    font-size:52px;
+    line-height:1.1;
+
+    margin-bottom:18px;
+}
+
+.checkout-info p{
+    color:#cbd5e1;
+    line-height:1.7;
+
+    margin-bottom:35px;
+}
+
+/* =========================
+   RESUMO
+========================= */
+
+.resumo{
+    padding:28px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    transition:0.4s;
+}
+
+.resumo.animando{
+    opacity:0;
+    transform:translateY(15px);
+}
+
+.resumo h3{
+    font-size:34px;
+    margin-bottom:15px;
+}
+
+.resumo p{
+    margin:14px 0;
+    color:#dbe5f0;
+    font-size:18px;
+}
+
+.valor{
+    margin-top:25px;
+
+    font-size:42px;
+    font-weight:bold;
+
+    color:#00ffd5;
+}
+
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+
+.checkout-form-box{
+    background:rgba(255,255,255,0.04);
+
+    border-radius:22px;
+
+    padding:35px;
+}
+
+.checkout-form-box h2{
+    margin-bottom:25px;
+    font-size:36px;
+}
+
+.checkout-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.checkout-form input,
+.checkout-form select,
+.checkout-form textarea{
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+    outline:none;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,0.92);
+
+    color:#333;
+
+    font-size:15px;
+
+    transition:0.3s;
+}
+
+.checkout-form textarea{
+    min-height:120px;
+    resize:none;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus,
+.checkout-form textarea:focus{
+    transform:scale(1.01);
+
+    box-shadow:0 0 15px rgba(0,255,213,0.25);
+}
+
+/* =========================
+   PAGAMENTO
+========================= */
+
+.titulo-pagamento{
+    margin-top:10px;
+    margin-bottom:5px;
+
+    font-size:17px;
+    font-weight:bold;
+}
+
+.metodo{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:18px 22px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,0.92);
+
+    color:#222;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    border:2px solid transparent;
+}
+
+.metodo:hover{
+    transform:translateY(-2px);
+}
+
+.metodo.ativo{
+    border:2px solid #00ffd5;
+
+    box-shadow:0 0 15px rgba(0,255,213,0.2);
+}
+
+.metodo input{
+    width:auto;
+    transform:scale(1.2);
+}
+
+.metodo strong{
+    font-size:17px;
+}
+
+.extra-pagamento{
+    background:rgba(255,255,255,0.06);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    animation:fade 0.4s ease;
+}
+
+.oculto{
+    display:none;
+}
+
+.linha-cartao{
+    display:flex;
+    gap:12px;
+}
+
+.pix-box{
+    text-align:center;
+}
+
+.qr-code{
+    width:180px;
+    border-radius:12px;
+
+    margin-bottom:15px;
+}
+
+.pix-box h3{
+    margin-bottom:10px;
+}
+
+.pix-box p{
+    color:#d6e2ee;
+    line-height:1.6;
+}
+
+/* =========================
+   BOTÃO
+========================= */
+
+.checkout-form button{
+    padding:18px;
+
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(90deg,#7b5cff,#00ffd5);
+
+    color:white;
+
+    font-size:17px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.checkout-form button:hover{
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(0,255,213,0.25);
+}
+
+/* =========================
+   SEGURANÇA
+========================= */
+
+.seguro{
+    text-align:center;
+
+    margin-top:15px;
+
+    color:#9fb3c8;
+
+    font-size:13px;
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:950px){
+
+    .checkout-box{
+        grid-template-columns:1fr;
+    }
+
+    .checkout-info h1{
+        font-size:38px;
+    }
+
+    nav{
+        gap:15px;
+        flex-wrap:wrap;
+    }
+
+    header{
+        padding:20px;
+    }
+
+    .linha-cartao{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">TitanX</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="portifolio.html">Portifólio</a>
+        <a href="estrutura.html">Estrutura</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+
+</header>
+
+<section class="checkout">
+
+<div class="checkout-box">
+
+    <!-- ESQUERDA -->
+
+    <div class="checkout-info">
+
+        <span class="tag">
+            CONTRATAÇÃO SEGURA
+        </span>
+
+        <h1>
+            Finalizar Contratação
+        </h1>
+
+        <p>
+            Preencha os dados abaixo para iniciar seu projeto
+            com a TitanX Technologies.
+        </p>
+
+        <div class="resumo">
+
+            <h3>Plano Profissional</h3>
+
+            <p>✔ Desenvolvimento do sistema</p>
+            <p>✔ Integrações e APIs</p>
+            <p>✔ Suporte especializado</p>
+            <p>✔ Entrega personalizada</p>
+
+            <div class="valor">
+                R$ 199/mês
+            </div>
+
+<div id="aviso-pacote" class="aviso-pacote oculto">
+    🚀 Você selecionou o <strong>Pacote Completo</strong>
+    <br>
+    <span>Tudo incluso por R$ 499/mês</span>
+</div>
+
+        </div>
+
+    </div>
+
+    <!-- DIREITA -->
+
+    <div class="checkout-form-box">
+
+        <h2>Dados da Empresa</h2>
+
+        <form class="checkout-form" action="sucesso.html">
+
+            <input type="text" placeholder="Nome da empresa" required>
+
+            <input type="email" placeholder="E-mail corporativo" required>
+
+            <input type="tel" placeholder="Telefone" required>
+
+            <!-- PLANO -->
+<div id="card-pacote" class="card-pacote oculto">
+
+    <h3>🚀 Pacote Completo</h3>
+
+    <p>✔ Software completo</p>
+    <p>✔ Hardware incluso</p>
+    <p>✔ Instalação</p>
+    <p>✔ Suporte premium</p>
+
+    <div class="valor">
+        R$ 499/mês
+    </div>
+
+</div>
+
+            <select required>
+                <option selected>Selecione o plano</option>
+
+                <option>Plano Básico — R$ 99/mês</option>
+
+                <option>Plano Profissional — R$ 199/mês</option>
+
+                <option>Plano Empresarial — R$ 399/mês</option>
+            </select>
+
+            <!-- HARDWARE -->
+
+            <select>
+                <option selected>
+                    Estrutura de hardware (opcional)
+                </option>
+
+                <option>Básico — R$ 2.000</option>
+
+                <option>Intermediário — R$ 3.500</option>
+
+                <option>Avançado — R$ 5.500</option>
+            </select>
+
+            <!-- PAGAMENTO -->
+
+            <div class="titulo-pagamento">
+                Forma de pagamento
+            </div>
+
+            <!-- CARTÃO -->
+
+          <label class="metodo ativo">
+
+    <div class="metodo-esquerda">
+        <input type="radio" name="pagamento" checked>
+        <strong>💳 Cartão de Crédito</strong>
+    </div>
+
+</label>
+
+            <!-- PIX -->
+
+            <label class="metodo">
+
+    <div class="metodo-esquerda">
+        <input type="radio" name="pagamento">
+        <strong>
+            <img src="pix.png" class="icone-pagamento">
+            PIX
+        </strong>
+    </div>
+
+            </label>
+
+            <!-- BOLETO -->
+
+            <label class="metodo">
+
+    <div class="metodo-esquerda">
+        <input type="radio" name="pagamento">
+        <strong>🧾 Boleto Bancário</strong>
+    </div>
+
+</label>
+
+            <!-- CARTÃO INFO -->
+
+            <div id="cartao-info" class="extra-pagamento">
+
+                <input type="text"
+                placeholder="Número do cartão">
+
+                <div class="linha-cartao">
+
+                    <input type="text"
+                    placeholder="Validade">
+
+                    <input type="text"
+                    placeholder="CVV">
+
+                </div>
+
+            </div>
+
+            <!-- PIX INFO -->
+
+            <div id="pix-info"
+            class="extra-pagamento oculto">
+
+                <div class="pix-box">
+
+                    <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=TitanXPagamentoPIX"
+                    class="qr-code">
+
+                    <p>
+                        Escaneie o QR Code para realizar o pagamento via PIX.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- BOLETO INFO -->
+
+            <div id="boleto-info"
+            class="extra-pagamento oculto">
+
+                <div class="pix-box">
+
+                    <h3>🧾 Boleto Bancário</h3>
+
+                    <p>
+                        O boleto será gerado automaticamente após finalizar a contratação.
+                    </p>
+
+                    <p>
+                        Vencimento em até 3 dias úteis.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- OBS -->
+
+            <textarea placeholder="Observações adicionais"></textarea>
+
+            <!-- BOTÃO -->
+
+            <button type="submit">
+                Finalizar Contratação
+            </button>
+
+        </form>
+
+        <div class="seguro">
+            🔒 Ambiente protegido e simulação segura para apresentação acadêmica
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<script>
+
+/* =========================
+   PLANOS DINÂMICOS
+========================= */
+
+const planos = [
+
+    {
+        nome:"Plano Básico",
+
+        preco:"R$ 99/mês",
+
+        itens:[
+            "✔ Sistema personalizado",
+            "✔ Funcionalidades essenciais",
+            "✔ Suporte por e-mail",
+            "✔ Atualizações inclusas"
+        ]
+    },
+
+    {
+        nome:"Plano Profissional",
+
+        preco:"R$ 199/mês",
+
+        itens:[
+            "✔ Desenvolvimento do sistema",
+            "✔ Integrações e APIs",
+            "✔ Suporte especializado",
+            "✔ Entrega personalizada"
+        ]
+    },
+
+    {
+        nome:"Plano Empresarial",
+
+        preco:"R$ 399/mês",
+
+        itens:[
+            "✔ Sistema escalável",
+            "✔ Integrações ilimitadas",
+            "✔ Consultoria dedicada",
+            "✔ Suporte VIP 24/7"
+        ]
+    }
+
+];
+
+let indice = 0;
+
+const resumo = document.querySelector(".resumo");
+
+function trocarPlano(){
+
+    resumo.classList.add("animando");
+
+    setTimeout(() => {
+
+        indice++;
+
+        if(indice >= planos.length){
+            indice = 0;
+        }
+
+        const plano = planos[indice];
+
+        resumo.innerHTML = `
+
+            <h3>${plano.nome}</h3>
+
+            ${plano.itens.map(item => `
+                <p>${item}</p>
+            `).join("")}
+
+            <div class="valor">
+                ${plano.preco}
+            </div>
+
+        `;
+
+        resumo.classList.remove("animando");
+
+    },350);
+
+}
+
+setInterval(trocarPlano,4000);
+
+/* =========================
+   PAGAMENTO
+========================= */
+
+const radios = document.querySelectorAll('input[name="pagamento"]');
+
+const metodos = document.querySelectorAll(".metodo");
+
+const cartao = document.getElementById("cartao-info");
+
+const pix = document.getElementById("pix-info");
+
+const boleto = document.getElementById("boleto-info");
+
+radios.forEach((radio,index)=>{
+
+    radio.addEventListener("change",()=>{
+
+        /* REMOVE ATIVO */
+
+        metodos.forEach(item=>{
+            item.classList.remove("ativo");
+        });
+
+        metodos[index].classList.add("ativo");
+
+        /* ESCONDE */
+
+        cartao.classList.add("oculto");
+        pix.classList.add("oculto");
+        boleto.classList.add("oculto");
+
+        /* MOSTRA */
+
+        if(index === 0){
+            cartao.classList.remove("oculto");
+        }
+
+        if(index === 1){
+            pix.classList.remove("oculto");
+        }
+
+        if(index === 2){
+            boleto.classList.remove("oculto");
+        }
+
+    });
+
+});
+
+</script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const plano = params.get("plano");
+
+const selectPlano = document.querySelectorAll("select")[0];
+const selectHardware = document.querySelectorAll("select")[1];
+const aviso = document.getElementById("aviso-pacote");
+
+if(plano === "pacote"){
+
+    // 🔥 mostra o card
+    const card = document.getElementById("card-pacote");
+    card.classList.remove("oculto");
+
+    // 🔒 desativa selects
+    selectPlano.classList.add("desativado");
+    selectHardware.classList.add("desativado");
+
+    selectPlano.disabled = true;
+    selectHardware.disabled = true;
+
+    // limpa seleção
+    selectPlano.selectedIndex = 0;
+    selectHardware.selectedIndex = 0;
+
+    // 🔥 muda resumo
+    const resumo = document.querySelector(".resumo");
+
+    resumo.innerHTML = `
+        <h3>Pacote Completo</h3>
+
+        <p>✔ Software completo</p>
+        <p>✔ Hardware incluso</p>
+        <p>✔ Instalação</p>
+        <p>✔ Suporte premium</p>
+
+        <div class="valor">
+            R$ 499/mês
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
